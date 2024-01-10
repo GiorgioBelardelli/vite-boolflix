@@ -1,25 +1,49 @@
 <script>
 import axios from 'axios'
 import AppHeader from './components/AppHeader.vue'
+import FilmList from './components/FilmList.vue';
 
 import { store } from './store';
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    FilmList,
   },
   data() {
     return {
       store
     }
-  }
+  },
+  methods: {
+    getFilms() {
+      let myURL = store.apiURL;
+
+      if (store.filterFilm !== "") {
+        myURL += `&query=${store.filterFilm}`;
+        console.log(myURL);
+
+        axios
+          .get(myURL)
+          .then((res => {
+            store.filmList = res.data.results;
+          }))
+          .catch((err) => {
+            console.log("Errore chiamata axios", err);
+          })
+      }
+    }
+  },
+  created() {
+    this.getFilms();
+  },
 }
 </script>
 
 <template>
-  <AppHeader message="BOOLFLIX" />
+  <AppHeader message="BOOLFLIX" @search="getFilms" />
   <main>
-    <h1>FILMLIST GOES HERE</h1>
+    <FilmList />
   </main>
 </template>
 

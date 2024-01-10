@@ -1,7 +1,14 @@
 <script>
+import { store } from '../store';
+
 export default {
     name: 'AppHeader',
     props: ['message'],
+    data() {
+        return {
+            store
+        }
+    }
 }
 </script>
 
@@ -11,8 +18,8 @@ export default {
             <h1>{{ message }}</h1>
 
             <div id="search-container">
-                <input class="text-input" type="text" placeholder="Cerca un film...">
-                <input class="search-button" type="button" value="Cerca">
+                <input class="text-input" type="text" placeholder="Cerca un film..." v-model="store.filterFilm">
+                <input class="search-button" type="button" value="Cerca" @click="$emit('search')">
             </div>
 
         </div>
