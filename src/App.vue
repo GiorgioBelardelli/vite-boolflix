@@ -16,32 +16,39 @@ export default {
     }
   },
   methods: {
-    getFilms() {
-      let myURL = store.apiURL;
+    getYourSearch() {
+      let filmURL = store.filmsURL;
+      let serieURL = store.seriesList;
 
-      if (store.filterFilm !== "") {
-        myURL += `&query=${store.filterFilm}`;
+      if (store.filter !== "") {
+        filmURL += `&query=${store.filter}`;
+        serieURL += `&query=${store.filter}`;
 
         axios
-          .get(myURL)
+          .get(filmURL)
           .then((res => {
             store.filmList = res.data.results;
           }))
           .catch((err) => {
             console.log("Errore chiamata axios", err);
-          })
+          });
 
+        axios
+          .get(serieURL)
+          .then((res => {
+            store.seriesList = res.data.results;
+          }))
+          .catch((err) => {
+            console.log("Errore chiamata axios", err);
+          });
       }
-    }
-  },
-  created() {
-    this.getFilms();
+    },
   },
 }
 </script>
 
 <template>
-  <AppHeader message="BOOLFLIX" @search="getFilms" />
+  <AppHeader message="BOOLFLIX" @search="getYourSearch" />
   <main>
     <FilmList />
   </main>

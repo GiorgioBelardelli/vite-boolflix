@@ -18,7 +18,7 @@ export default {
             <h1>{{ message }}</h1>
 
             <div id="search-container">
-                <input class="text-input" type="text" placeholder="Cerca un film..." v-model="store.filterFilm">
+                <input class="text-input" type="text" placeholder="Cerca un film..." v-model="store.filter">
                 <input class="search-button" type="button" value="Cerca" @click="$emit('search')">
             </div>
 

@@ -13,8 +13,14 @@ export default {
         }
     },
     methods: {
-        getFlagPath(language) {
-            return `../assets/${language}.png`;
+        getFlag(language) {
+
+            if (language === "it" || language === "es" || language === "en" || language === "fr") {
+                return `/${language}.png`
+            } else {
+                return `/settings.png`
+            }
+
         },
 
     },
@@ -28,8 +34,8 @@ export default {
             <ul>
                 <li v-for="film in  store.filmList " :key="film.id">
                     <a href="#">
-                        {{ film.title }}\\{{ film.original_title }}\\{{ film.vote_average }}//{{ film.original_language }}
-                        <img :src="getFlagPath(film.original_language)">
+                        {{ film.title }}\\{{ film.original_title }}\\{{ film.vote_average }}
+                        <img :src="getFlag(film.original_language)">
                     </a>
                 </li>
             </ul>
