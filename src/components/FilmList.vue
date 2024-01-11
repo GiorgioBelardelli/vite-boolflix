@@ -8,8 +8,15 @@ export default {
     },
     data() {
         return {
-            store
+            store,
+
         }
+    },
+    methods: {
+        getFlagPath(language) {
+            return `../assets/${language}.png`;
+        },
+
     },
 }
 </script>
@@ -19,9 +26,10 @@ export default {
         <h1>FILM LIST GOES HERE</h1>
         <div class="row">
             <ul>
-                <li v-for="film in store.filmList">
-                    <a href="">
-                        {{ film.title }}{{ film.original_title }}{{ film.original_language }}{{ film.vote_average }}
+                <li v-for="film in  store.filmList " :key="film.id">
+                    <a href="#">
+                        {{ film.title }}\\{{ film.original_title }}\\{{ film.vote_average }}//{{ film.original_language }}
+                        <img :src="getFlagPath(film.original_language)">
                     </a>
                 </li>
             </ul>

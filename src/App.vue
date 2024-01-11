@@ -21,7 +21,6 @@ export default {
 
       if (store.filterFilm !== "") {
         myURL += `&query=${store.filterFilm}`;
-        console.log(myURL);
 
         axios
           .get(myURL)
@@ -31,6 +30,7 @@ export default {
           .catch((err) => {
             console.log("Errore chiamata axios", err);
           })
+
       }
     }
   },
