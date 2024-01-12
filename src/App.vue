@@ -18,7 +18,7 @@ export default {
   methods: {
     getYourSearch() {
       let filmURL = store.filmsURL;
-      let serieURL = store.seriesList;
+      let serieURL = store.seriesURL;
 
       if (store.filter !== "") {
         filmURL += `&query=${store.filter}`;
@@ -27,7 +27,7 @@ export default {
         axios
           .get(filmURL)
           .then((res => {
-            store.filmList = res.data.results;
+            store.filmsList = res.data.results;
           }))
           .catch((err) => {
             console.log("Errore chiamata axios", err);
