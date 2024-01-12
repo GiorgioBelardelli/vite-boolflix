@@ -9,8 +9,6 @@ export default {
     data() {
         return {
             store,
-            stars: 0,
-            emptyStars: 0,
         }
     },
     methods: {
@@ -28,7 +26,16 @@ export default {
         },
         getStars(voto) {
             const stars = Math.ceil(voto / 2);
-            const emptyStars = 5 - stars;
+            const starList = [];
+
+            for (let i = 0; i < 5; i++) {
+                if (i <= stars) {
+                    starList.push('fa-solid fa-star');
+                } else {
+                    starList.push('fa-regular fa-star');
+                }
+            }
+            return starList;
         },
     },
 }
@@ -44,23 +51,15 @@ export default {
                         {{ film.title }}\\{{ film.original_title }}\\{{ film.vote_average }}
                         <img :src="getFlag(film.original_language)">
                         <img :src="getPoster(film.poster_path)" :alt="film.title + ' poster'">
-                        <!-- <h1><i class="fa-regular fa-star"></i><i class="fa-solid fa-star"></i></h1> -->
-                        <div class="star-container">
-                            <ul>
-                                <li>
-
-                                </li>
-                            </ul>
-                        </div>
                     </a>
+                    <i v-for="starClass in getStars(film.vote_average)" :class="starClass"></i>
                 </li>
                 <li v-for="serie in store.seriesList" :key="serie.id">
                     <a href="#">
                         {{ serie.name }}\\{{ serie.original_name }}\\{{ serie.vote_average }}
                         <img :src="getFlag(serie.original_language)">
                         <img :src="getPoster(serie.poster_path)" :alt="serie.name + ' poster'">
-                        <div class="star-container">
-                        </div>
+                        <i v-for="starClass in getStars(serie.vote_average)" :class="starClass"></i>
                     </a>
                 </li>
             </ul>
