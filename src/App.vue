@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios'
 import AppHeader from './components/AppHeader.vue'
-import FilmList from './components/FilmList.vue';
+import FilmList from './components/FilmList.vue'
 
 import { store } from './store';
 
@@ -61,6 +61,5 @@ export default {
 
 main {
   background-color: $grey;
-  padding: 2rem;
 }
 </style>
